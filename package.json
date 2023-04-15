@@ -13,7 +13,7 @@
     "lint": "eslint rollup.config.js test/ src/ bin/ inspector/ scripts/ --cache --ext=js,mjs",
     "build": "run-s build:*",
     "build:regex_data": "node scripts/gen_regex_sets.js",
-    "build:engine": "rollup -c",
+    "build:engine": "rollup -c -w",
     "test": "bash test/test_root.sh",
     "test:test262": "node --enable-source-maps test/test262/test262.js",
     "test:supplemental": "node --enable-source-maps test/supplemental.js",

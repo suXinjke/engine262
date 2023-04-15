@@ -102,6 +102,15 @@ function NumberProto_valueOf(args, { thisValue }) {
   return Q(thisNumberValue(thisValue));
 }
 
+function NumberProto_valueGetter(args, { thisValue }) {
+    return thisValue
+}
+
+function NumberProto_valueSetter(args, { thisValue }) {
+    thisValue.number = args[0].number
+    return thisValue
+}
+
 export function bootstrapNumberPrototype(realmRec) {
   const proto = bootstrapPrototype(realmRec, [
     ['toExponential', NumberProto_toExponential, 1],
@@ -110,6 +119,7 @@ export function bootstrapNumberPrototype(realmRec) {
     ['toPrecision', NumberProto_toPrecision, 1],
     ['toString', NumberProto_toString, 1],
     ['valueOf', NumberProto_valueOf, 0],
+    ['value', [NumberProto_valueGetter, NumberProto_valueSetter], 0],
   ], realmRec.Intrinsics['%Object.prototype%']);
 
   proto.NumberData = F(+0);
